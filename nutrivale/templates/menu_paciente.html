@@ -1,0 +1,121 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block body %}
+
+<div>errores{{errors}}</div>
+
+<div class="container">    
+    <div class="row">
+        <div class="col">
+            <a href="
+            {% if ano_anterior %}
+            {% url 'menu_paciente' ano=ano_anterior mes=mes_anterior dia=dia_anterior %}
+
+            {% elif mes_anterior %}
+            {% url 'menu_paciente' ano=ano mes=mes_anterior dia=dia_anterior %}
+
+            {% else %}
+            {% url 'menu_paciente' ano=ano mes=mes dia=dia_anterior%}
+            {% endif %}
+            " id="mes_anterior"><img src="{% static 'img/caret-left-fill.svg' %}" alt=""></a>
+        </div>
+        <div class="col text-center">
+            <h1 id="nombre_mes">{{ fecha }}</h1>
+        </div>
+        <div class="col">
+            <a href="
+            {% if ano_siguiente %}
+            {% url 'menu_paciente' ano=ano_siguiente mes=mes_siguiente dia=dia_siguiente %}
+
+            {% elif mes_siguiente %}
+            {% url 'menu_paciente' ano=ano mes=mes_siguiente dia=dia_siguiente %}
+
+            {% else %}
+            {% url 'menu_paciente' ano=ano mes=mes dia=dia_siguiente%}
+            {% endif %}"
+            class="float-end" id="mes_siguiente"><img src="{% static 'img/caret-right-fill.svg' %}" alt=""></a>
+        </div>
+    </div>
+</div>
+
+<div class="container text-center" style="margin-top:100px">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Lunes</th>
+                <th>Martes</th>
+                <th>Miercoles</th>
+                <th>Jueves</th>
+                <th>Viernes</th>
+                <th>Sábado</th>
+                <th>Domingo</th>
+            </tr> 
+        </thead>
+        <tbody class="text-center">
+            <tr height="80">
+                {% for dia in semana %}
+                <td>
+                    {{ dia.dia }}
+                    {% for hora in dia.horas %}
+                    <div>
+                        <button type="button" onclick="setFecha({{dia.ano}}, {{dia.mes}}, {{dia.dia}});setHora('{{ hora }}')" class="btn btn-outline-morado m-1" data-bs-toggle="modal" data-bs-target="#addItemModal">
+                            {{ hora }}
+                        </button>
+                    </div>
+                    {% endfor %}
+                    
+                </td>
+                {% endfor %}
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Modal Ingresar Item -->
+<div class="modal fade" id="addItemModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Ingresar Consulta</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form id="itemForm" method="POST" class="needs-validation" novalidate>
+                <table class="table">
+                    {{ form.as_table }}
+                    {% csrf_token %}
+                </table>
+            </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="submit" form="itemForm" class="btn btn-primary">Ingresar</button>
+        </div>
+      </div>
+    </div>
+</div>
+
+{% comment %} <div class="modal fade" id="addItemModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Ingresar Consulta</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form id="itemForm2" method="POST">
+                <table class="table">
+                    {{ form.as_table }}
+                    {% csrf_token %}
+                </table>
+            </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="submit" form="itemForm" class="btn btn-primary">Ingresar</button>
+        </div>
+      </div>
+    </div>
+</div> {% endcomment %}
+
+{% endblock body %}

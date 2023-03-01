@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+.calendario{
+    font-family: 'Poppins', sans-serif;
+}
+
+.day{
+}
+
+.day:hover{
+    color: rgb(134, 100, 255);
+    cursor: pointer;
+    background-color: rgb(208, 188, 255);
+    
+}

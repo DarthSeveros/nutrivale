@@ -1,0 +1,65 @@
+.morado {
+    color: #3F2097;
+}
+
+.background-morado {
+    background-color: #3F2097;
+}
+
+.btn-morado {
+    background-color: #3F2097;
+    color: #fff;
+    border-radius: 30px;
+}
+
+.btn-morado:hover {
+    background-color: #321977;
+    color: #fff;
+}
+
+.plomo {
+    color: #212121;
+}
+
+.link-plomo {
+    color: #212121;
+}
+
+.link-plomo:hover {
+    color:#3F2097;
+}
+
+.link-blanco {
+    color: #fff;
+    text-decoration: none;
+}
+
+.link-blanco:hover {
+    color:#88568a;
+}
+
+.background-celeste {
+    background-color: #E6F5FF;
+}
+
+.social-media-ico {
+    color: #fff;
+}
+.social-media-ico:hover {
+    color: #88568a;
+}
+
+.btn-outline-morado {
+    color: #3F2097;
+    background-color: #fff;
+    border-color: #3F2097;
+}
+
+.btn-outline-morado:hover {
+    color: #fff;
+    background-color: #3F2097;
+}
+
+.block-container {
+    margin: 250px auto
+}

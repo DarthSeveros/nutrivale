@@ -1,0 +1,13 @@
+{% extends 'layout.html' %}
+
+{% block title %}Datos Paciente{% endblock title %}
+
+{% block body %}
+<form method="POST">
+    <table class="table">
+        {{ form.as_table }}
+        {% csrf_token %}
+    </table>
+    <button type="submit"class="btn btn-primary">Ingresar</button>
+</form>
+{% endblock body %}

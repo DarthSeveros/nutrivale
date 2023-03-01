@@ -1,0 +1,112 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block body %}
+<div class="container">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <a href="{% url 'agenda' ano=mes_anterior.year mes=mes_anterior.month%}" id="mes_anterior"><img src="{% static 'img/caret-left-fill.svg' %}" alt=""></a>
+            </div>
+            <div class="col text-center">
+                <h1 id="nombre_mes">{{ nombre_mes }} {{ ano_mes }}</h1>
+            </div>
+            <div class="col">
+                <a href="{% url 'agenda' ano=mes_siguiente.year mes=mes_siguiente.month%}" class="float-end" id="mes_siguiente"><img src="{% static 'img/caret-right-fill.svg' %}" alt=""></a>
+            </div>
+        </div>
+    </div>
+    <table class="table table-bordered calendario" id="tabla_calendario">
+        <thead>
+            <tr>
+                <th width="150">LU</th>
+                <th width="150">MA</th>
+                <th width="150">MI</th>
+                <th width="150">JU</th>
+                <th width="150">VI</th>
+                <th width="150">SA</th>
+                <th width="150">DO</th>
+            </tr>    
+        </thead>
+        <tbody style="margin:15px;">
+            {% for mod in mods %}
+            {% if mod.tipo == 'start' %}
+            <tr height="120">
+            {% endif %}
+            <td class="day" 
+            {% if mod.tipo == 'end' %}style="color: red; background-color: #ffeeee"{% endif %}
+            {% if mod.fecha.day and mod.tipo != 'end' %} data-bs-toggle="modal" data-bs-target="#addItemModal" onclick="setFecha({{mod.fecha.year}}, {{mod.fecha.month}}, {{mod.fecha.day}});setHoras({{mod.horas}});"{% endif %}>
+            {{ mod.fecha.day }}
+            <br>
+                {% for consulta in mod.consultas %}
+                <div class="badge text-bg-primary" onclick="setIdDelete({{consulta.id}}, '{{consulta}} {{consulta.hora}} {{consulta.modalidad}} {{consulta.tipo}}', '')" data-bs-toggle="modal" data-bs-target="#deleteItemModal">{{ consulta }}</div>
+                {% endfor %}
+            </td>
+            {% if mod.tipo == 'end' %}
+            </tr>
+            {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Modal Ingresar Item -->
+<div class="modal fade" id="addItemModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Ingresar Consulta</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form id="itemForm" method="POST">
+                <table class="table">
+                    <tbody>
+                        {% for field in form %}
+                        {% if field == form.active %}
+                            {{ field }}
+                        {% else %}
+                        <tr>
+                            <th>{{ field.label_tag }}</th>
+                            <td>{{ field }}</td>
+                            <td>{{ field.errors }}</td>
+                        </tr>
+                        {% endif %}
+                        {% endfor %}
+                    </tbody>
+                    {% csrf_token %}
+                </table>
+            </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="submit" form="itemForm" class="btn btn-primary">Ingresar</button>
+        </div>
+      </div>
+    </div>
+</div>
+
+<!-- Modal eliminar dato -->
+<div class="modal fade" id="deleteItemModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Consulta</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <p id="datoEliminado"></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <a id="deleteConfirm" href="" class="btn btn-danger">Eliminar</a>
+        </div>
+      </div>
+    </div>
+</div>
+
+</div>
+
+
+
+
+
+{% endblock body %}

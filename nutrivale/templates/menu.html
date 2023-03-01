@@ -1,0 +1,78 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block body %}
+<div class="container">
+    <div class="container block-container">
+        <div class="card border-0" style="max-width: 1300px">
+            <div class="row g-0">
+              <div class="col-md-6">
+                <div class="card-body">
+                  <h5 class="card-title morado">¡Come sin culpas!</h5>
+                  <p class="card-text">Consulta presencial en Pitrufquén, Araucanía, Chile.</p>
+                  <a class="btn btn-morado fw-bold" href="" role="button">Consulta Presencial</a>
+                  <a class="btn btn-morado fw-bold" href="" role="button">Consulta Online</a>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <img src="{% static 'img/nutri.jpg' %}" class="img-fluid rounded-5" alt="...">
+              </div>
+            </div>
+          </div>
+    </div>
+
+    <div class="container block-container">
+        <h1 class="text-center morado fw-bold ">ATENCIÓN NUTRICIONAL</h1>
+        <div class="row justify-content-between gap-3 m-5">
+            <div class="card text-center mx-5 border-0 background-celeste col-md-auto" style="width: 20rem; height: 18rem">
+                <div class="card-body">
+                  <h5 class="card-title morado">Presencial</h5>
+                  <p class="card-text morado">En Av. siempreviva #742 Pitrufquén.</p>
+                  <a href="#" class="btn btn-morado fw-bold" role="button">Más información</a>
+                </div>
+            </div>
+            <div class="card text-center mx-5 border-0 background-celeste col-md-auto" style="width: 20rem">
+                <div class="card-body">
+                  <h5 class="card-title morado">Online</h5>
+                  <p class="card-text morado">A través de videollamada para mayor comodidad</p>
+                  <a href="#" class="btn btn-morado fw-bold" role="button">Más información</a>
+                </div>
+            </div>
+        </div>
+        <div class="container pb-5 mx-5 morado">
+            <p>Dirigido a adultos y adultos mayores que:</p>
+            <ul>
+                <li>Padecen Diabetes mellitus, resistencia a la insulina, hipertensión arterial, dislipidemias, sobrepeso, obesidad.</li>
+                <li>Patologías gastrointestinales (enfermedad celiaca, síndrome de intestino irritable, etc).</li>
+                <li>Quieran mejorar sus hábitos alimentarios y estilo de vida.</li>
+            </ul>
+        </div>
+        <div class="container block-container">
+            <h1 class="morado fw-bold">Sobre mí</h1>
+            <div class="card my-5 py-5 border-0" style="max-width: 1300px">
+                <div class="row g-0">
+                  <div class="col-md-6">
+                    <img src="{% static 'img/nutri.jpg' %}" class="img-fluid rounded-circle" alt="...">
+                  </div>
+                  <div class="col-md-4 my-auto background-celeste h-25 center rounded-5 rounded-start" style="background-color: #FFE4FE">
+                    <div class="card-body">
+                      <h5 class="card-title morado">¡Hola!</h5>
+                      <p class="card-text plomo">Mi motivación como profesional es ayudarte a sanar tu relación con la comida, brindándote 
+                        herramientas para que aprendas a hacer mejores elecciones alimentarias, sin pasar hambre.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </div>
+        <div class="container block-container">
+            <h1 class="fst-italic fw-bold text-center">Formación académica</h1>
+            <div class="row row-cols-1 gap-5 my-5 py-5">
+                <div class="col">Nutricionista titulada de la Universidad de La Frontera</div>
+                <div class="col">Certificación internacional en Psicología de la Alimentación</div>
+                <div class="col">Certificación internacional en Gastroenterología</div>
+                <div class="col">Certificación en el tratamiento de la obesidad</div>
+            </div>
+        </div>
+    </div>
+</div>
+{% include 'footer.html' %}
+{% endblock body %}

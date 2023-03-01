@@ -1,0 +1,99 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}Pacientes{% endblock %}
+
+
+{% block body %}
+<div class="alert alert-info display-1 text-center">Pacientes</div>
+
+{% if items %}
+    <table class="table table-striped table-inverse table-responsive">
+        <thead class="thead-inverse">
+            <tr>
+                <th>Nombre</th>
+                <th>RUT</th>
+                <th>Opciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+            <tr>
+                <td>{{ item.nombre }} {{ item.apellido }}</td>
+                <td>{{ item.rut}}</td>
+                <td><a href="" class="btn btn-success btn-sm float-end"><i class="bi bi-pencil"></i></a></td>
+                <td>
+                    <button type="button" onclick="url='{% url "eliminar_paciente" id=item.id %}';setIdDelete('{{ item.id }}', '{{ item.nombre }} {{ item.apellido }}', url);" class="btn btn-danger btn-sm float-start" data-bs-toggle="modal" data-bs-target="#deleteItemModal">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <div class="alert alert-primary" role="alert">
+        <strong>No se encuentran pacientes en el sistema</strong>
+    </div>
+    {% endif %}
+
+    <table class="table">
+      <tr>
+          <td>
+              <a href="{% url 'menu' %}" class="btn btn-outline-secondary">Volver</a>
+          </td>
+          <td>
+            <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#addItemModal">
+              Agregar Paciente
+          </button>
+          </td>    
+      </tr>
+  </table>
+
+<!-- Modal Ingresar Item -->
+<div class="modal fade" id="addItemModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Ingresar paciente</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form id="itemForm" method="POST">
+                <table class="table">
+                    {{ form.as_table }}
+                    {% csrf_token %}
+                </table>
+            </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="submit" form="itemForm" class="btn btn-primary">Ingresar</button>
+        </div>
+      </div>
+    </div>
+</div>
+
+  
+<!-- Modal eliminar dato -->
+<div class="modal fade" id="deleteItemModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar paciente</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            ¿Estás seguro que deseas eliminar?
+            <p id="datoEliminado"></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <a id="deleteConfirm" href="" class="btn btn-danger">Eliminar</a>
+        </div>
+      </div>
+    </div>
+</div>
+
+
+{% endblock body %}

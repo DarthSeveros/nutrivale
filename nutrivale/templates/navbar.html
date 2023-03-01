@@ -1,0 +1,14 @@
+<header class="d-flex flex-wrap justify-content-center py-4 mb-4 border-bottom" style="background-color: #DCD9F6; padding-right: 200px; padding-left: 200px">
+  <a href="{% url 'menu' %}" class="d-flex flex-column align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+    <div class="fs-4 wood-font morado"><strong class="fst-italic">Valentina parra</strong></div>
+    <div><strong class="text-uppercase">Nutricionista</strong></div>
+  </a>
+
+  <ul class="nav nav-pills align-self-center" style="font-size: 1.5rem; link-color:black">
+    <li class="nav-item"><a class="nav-link link-plomo fw-light" href="{% url 'menu' %}">Inicio</a></li>
+    <li class="nav-item"><a class="nav-link link-plomo fw-light" href="{% url 'listado_consulta' %}">Consultas</a></li>
+    <li class="nav-item"><a class="nav-link link-plomo fw-light" href="{% url 'pacientes' %}">Pacientes</a></li>
+    <li class="nav-item"><a class="nav-link link-plomo fw-light" href="{% url 'agenda' %}">Agenda</a></li>
+    <li class="nav-item"><a class="btn btn-morado btn-lg" role="button" href="{% url 'menu_paciente' %}">Agenda tu hora</a></li>
+  </ul>
+</header>

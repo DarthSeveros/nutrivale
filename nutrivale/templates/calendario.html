@@ -1,0 +1,26 @@
+<div class="dropdown">
+    <input type="select" name="fecha" class="form-control dropdown-toggle" required id="id_fecha" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+    <div class="dropdown-menu calendario">
+        <div class= "list-group list-group-horizontal">
+            <li class="list-group-item border-0">LU</li>
+            <li class="list-group-item border-0">MA</li>
+            <li class="list-group-item border-0">MI</li>
+            <li class="list-group-item border-0">JU</li>
+            <li class="list-group-item border-0">VI</li>
+            <li class="list-group-item border-0">SA</li>
+            <li class="list-group-item border-0">DO</li>
+        </div>
+        <hr>
+        <div style="margin:15px;">
+            {% for day, opcion in mods %}
+            {% if opcion == 'start' %}
+            <div class="row">
+            {% endif %}
+            <div class="col text-center day " id="dia_{{ day }}">{{ day }}</div>
+            {% if opcion == 'end' %}
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div> 
+</div>
